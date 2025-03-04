@@ -1,10 +1,11 @@
 services:
   mariadb:
     container_name: firefox_mariadb
-    image: linuxserver/mariadb:10.6.13
+    build:
+      context: ./app/
+      dockerfile: Dockerfile-database
     volumes:
       - ./data/config:/config
-      - ./data/initdb.d/init.sql:/config/initdb.d/init.sql
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: syncstorage
@@ -14,7 +15,9 @@ services:
 
   syncserver:
     container_name: firefox_syncserver
-    build: ./app/
+    build:
+      context: ./app/
+      dockerfile: Dockerfile-syncserver
     restart: unless-stopped
     ports:
       - "8000:8000"

@@ -1,0 +1,3 @@
+FROM linuxserver/mariadb:10.6.13
+
+COPY db-init.sql /config/initdb.d/init.sql
