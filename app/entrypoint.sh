@@ -17,7 +17,7 @@ port="$(echo $host | sed -e 's,^.*:,:,g' -e 's,.*:\([0-9]*\).*,\1,g' -e 's,[^0-9
 host="$(echo ${host/:$port/} | cut -d/ -f1)"
 db="$(echo $url | grep / | cut -d/ -f2-)"
 
-# Create service and node if they doesnt exist
+# Create service and node if they don't exist
 mysql $db -h $host -P $port -u $user -p"$pass" <<EOF
 DELETE FROM services;
 INSERT INTO services (id, service, pattern) VALUES
@@ -34,7 +34,7 @@ master_secret = "${SYNC_MASTER_SECRET}"
 human_logs = 1
 
 host = "0.0.0.0"
-port = 8000
+port = ${SYNC_PORT}
 
 syncstorage.database_url = "${SYNC_SYNCSTORAGE_DATABASE_URL}"
 syncstorage.enable_quota = 0

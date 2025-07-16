@@ -28,3 +28,4 @@ services:
       METRICS_HASH_SECRET: ${METRICS_HASH_SECRET}
       SYNC_SYNCSTORAGE_DATABASE_URL: mysql://sync:${MYSQL_PASSWORD}@mariadb:3306/syncstorage_rs
       SYNC_TOKENSERVER_DATABASE_URL: mysql://sync:${MYSQL_PASSWORD}@mariadb:3306/tokenserver_rs
+      SYNC_PORT: "8000"
