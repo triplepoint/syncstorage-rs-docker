@@ -22,7 +22,7 @@ RUN git clone https://github.com/mozilla-services/syncstorage-rs ./ \
 RUN virtualenv venv \
     && /app/venv/bin/pip install -r requirements.txt \
     && /app/venv/bin/pip install -r tools/tokenserver/requirements.txt \
-    && /app/venv/bin/pip install pyopenssl==22.1.0
+    && /app/venv/bin/pip install pyopenssl==25.1.0
 
 # Cleanup
 RUN rm -rf \
