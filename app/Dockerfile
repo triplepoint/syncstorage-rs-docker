@@ -1,4 +1,4 @@
-from rust:latest
+FROM rust:latest
 
 # Create needed directories
 RUN mkdir /app /config
@@ -13,7 +13,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Clone syncstorage-rs and build it
+ARG SYNCSTORAGE_RS_VERSION=0.18.3
 RUN git clone https://github.com/mozilla-services/syncstorage-rs ./ \
+    && git checkout $SYNCSTORAGE_RS_VERSION \
     && cargo install --path ./syncserver --no-default-features --features=syncstorage-db/mysql --locked \
     && cargo install diesel_cli --no-default-features --features 'mysql' \
     && cargo clean
