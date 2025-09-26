@@ -1,5 +1,7 @@
 FROM rust:latest
 
+ARG GIT_COMMIT=0.18.3
+
 # Create needed directories
 RUN mkdir /app /config
 WORKDIR /app
@@ -13,9 +15,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Clone syncstorage-rs and build it
-ARG SYNCSTORAGE_RS_VERSION=0.18.3
 RUN git clone https://github.com/mozilla-services/syncstorage-rs ./ \
-    && git checkout $SYNCSTORAGE_RS_VERSION \
+    && git checkout ${GIT_COMMIT} \
     && cargo install --path ./syncserver --no-default-features --features=syncstorage-db/mysql --locked \
     && cargo install diesel_cli --no-default-features --features 'mysql' \
     && cargo clean
@@ -24,7 +25,7 @@ RUN git clone https://github.com/mozilla-services/syncstorage-rs ./ \
 RUN virtualenv venv \
     && /app/venv/bin/pip install -r requirements.txt \
     && /app/venv/bin/pip install -r tools/tokenserver/requirements.txt \
-    && /app/venv/bin/pip install pyopenssl==25.1.0
+    && /app/venv/bin/pip install pyopenssl==25.3.0
 
 # Cleanup
 RUN rm -rf \
