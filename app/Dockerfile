@@ -1,6 +1,7 @@
-FROM rust:latest
+FROM rust:1.91.1
 
-ARG GIT_COMMIT=0.18.3
+# 0.18.3
+ARG GIT_COMMIT=36614c3db4f7d46612d6afb26bd85f1fe68ca62c
 
 # Create needed directories
 RUN mkdir /app /config
